@@ -69,9 +69,6 @@ In a browser:
 ## Utility Commands
 
 Use the following command to enter the bash shell of each container.
-Replaces using the docker exec function.
-
-To change container names, change name in yaml file and control file.
 
 Enter eass container:
 
