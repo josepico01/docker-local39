@@ -134,7 +134,7 @@ e.g.
 
 VNC client can be used to connect to the Selenium container (Selenium Chrome Standalone Debugger)
 
-Connect to: ```localhost:5900```
+Connect to: ```localhost:5900```<br>
 Password: ```secret```
 
 ## PHPStormm debugging via xDebug
