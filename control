@@ -1,0 +1,36 @@
+#! /bin/bash
+
+## Change to directory of where this script is located
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd $DIR;
+
+case "$1" in
+    eass)
+        cont="$(docker-compose ps -q eass)"
+        docker exec -ti $cont bash
+        ;;
+
+    behat)
+        cont="$(docker-compose ps -q behat-runner)"
+        docker exec -ti $cont bash
+        ;;
+
+    db)
+        cont="$(docker-compose ps -q db)"
+        docker exec -ti $cont bash
+        ;;
+
+    testdb)
+        cont="$(docker-compose ps -q test-db)"
+        docker exec -ti $cont bash
+        ;;
+
+    selenium)
+        cont="$(docker-compose ps -q selenium)"
+        docker exec -ti $cont bash
+        ;;
+
+    *)
+        echo Invalid command "$1"
+        exit 1
+esac
