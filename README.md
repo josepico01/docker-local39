@@ -123,11 +123,11 @@ make init-phpunit
 
 To run an individual unit test:
 ```
-./run_phphunit <classname> <php_test_file>
+./run_phphunit.sh <classname> <php_test_file>
 ```
 e.g.
 ```
-./run_phpunit auth_manual_testcase auth/manual/tests/manual_test.php
+./run_phpunit.sh auth_manual_testcase auth/manual/tests/manual_test.php
 ```
 
 ## Running Behat tests
