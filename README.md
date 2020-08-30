@@ -132,7 +132,7 @@ e.g.
 
 ## Running Behat tests
 
-The initialisation process is ran at bootstrapping of the container.
+The initialisation process is automatically ran at bootstrapping of the container.
 
 To run an individual behat feature test:
 ```
