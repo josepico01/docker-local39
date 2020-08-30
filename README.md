@@ -155,37 +155,37 @@ Password: ```secret```
 
 Set up two PHP Remote Debug configurations in PHPStorm.
 
-1. eAssessment Moodle
-Tick ```Filter debug connection by IDE key```
-Configure server with:
-    Server Name: eass-docker
-        Host: localhost
-        Port: 80
-        Debugger: XDebug
+### eAssessment Moodle
+  Tick ```Filter debug connection by IDE key```
+  Configure server with:
+      Server Name: eass-docker
+          Host: localhost
+          Port: 80
+          Debugger: XDebug
+  
+  Tick ```Use path mappings```
+  Set absolute path on the server for the Project files to: ```/siteroot```
+  Set the IDE key to: ```eass-docker```
+  
+  Save.
 
-Tick ```Use path mappings```
-Set absolute path on the server for the Project files to: ```/siteroot```
-Set the IDE key to: ```eass-docker```
+### Behat
+  Tick ```Filter debug connection by IDE key```
+  Configure server with:
+      Server Name: behat-runner-docker
+          Host: localhost
+          Port: 8080
+          Debugger: XDebug
+  
+  Tick ```Use path mappings```
+  Set absolute path on the server for the Project files to: ```/siteroot```
+  
+  Set the IDE key to: ```behat-runner-docker```
+  
+  Save.
 
-Save.
-
-2. Behat
-Tick ```Filter debug connection by IDE key```
-Configure server with:
-    Server Name: behat-runner-docker
-        Host: localhost
-        Port: 8080
-        Debugger: XDebug
-
-Tick ```Use path mappings```
-Set absolute path on the server for the Project files to: ```/siteroot```
-
-Set the IDE key to: ```behat-runner-docker```
-
-Save.
-
-Run either/both debuggers configured in PHPStorm.
-Set any breakpoints in code.
-Run PhpUnit or Behat test as per above instructions.
-Watch the PHPStorm Debugger/Console/Output window.
-Win.
+  Run either/both debuggers configured in PHPStorm.
+  Set any breakpoints in code.
+  Run PhpUnit or Behat test as per above instructions.
+  Watch the PHPStorm Debugger/Console/Output window.
+  Win.
