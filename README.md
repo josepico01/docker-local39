@@ -170,22 +170,22 @@ Set up two PHP Remote Debug configurations in PHPStorm.
   Save.
 
 ### Behat
-  Tick ```Filter debug connection by IDE key```
-  Configure server with:
-      Server Name: behat-runner-docker
-          Host: localhost
-          Port: 8080
-          Debugger: XDebug
+  Tick ```Filter debug connection by IDE key```<br>
+  Configure server with:<br>
+      Server Name: behat-runner-docker<br>
+          Host: localhost<br>
+          Port: 8080<br>
+          Debugger: XDebug<br>
   
-  Tick ```Use path mappings```
-  Set absolute path on the server for the Project files to: ```/siteroot```
+  Tick ```Use path mappings```<br>
+  Set absolute path on the server for the Project files to: ```/siteroot```<br>
   
   Set the IDE key to: ```behat-runner-docker```
   
   Save.
 
-  Run either/both debuggers configured in PHPStorm.
-  Set any breakpoints in code.
-  Run PhpUnit or Behat test as per above instructions.
-  Watch the PHPStorm Debugger/Console/Output window.
+  Run either/both debuggers configured in PHPStorm.<br>
+  Set any breakpoints in code.<br>
+  Run PhpUnit or Behat test as per above instructions.<br>
+  Watch the PHPStorm Debugger/Console/Output window.<br>
   Win.
