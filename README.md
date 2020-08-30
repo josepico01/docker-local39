@@ -9,7 +9,10 @@ For Windows users, make sure to do a full clean re-install of the latest Docker 
 Install the Ubuntu 20.04LTS image from the Microsoft market place.
 
 Configure Docker and allow integration from the WSL Ubuntu 20.04LTS image installed.
-The docker-compose tool can be installed via pip
+The docker-compose tool can be installed via pip, e.g.
+```
+    pip install docker-compose
+```
 
 ## Usage
 
@@ -21,15 +24,24 @@ git clone ssh://git@bitbucket.apps.monash.edu:7999/eass/docker-local.git
 
 2. Clone Moodle code into siteroot
 
+Prod branch name: ```mdl35-monash-eassess```
+Uat branch name: ```mdl35-monash-eassess-uat```
+
 ```
 cd docker-local
-git clone git@git.catalyst-au.net:monash/moodle-eassess.git siteroot
+git clone git@git.catalyst-au.net:monash/moodle-eassess.git -b <branchname> siteroot
 ```
 
 Alternatively, create a symlink to an existing checkout.
 ```
 cd docker-local
 ln -s /path/to/moodle-eassess siteroot
+```
+
+Mandatory step - checkout git submodules:
+```
+cd siteroot
+git submodule update --init --recursive
 ```
 
 3. Copy site config across
@@ -59,6 +71,8 @@ If you prefer to run it in background mode:
 ```
 make run OPT=-d
 ```
+
+See the Makefile for other targets that you can use.
 
 ## Logging into eAssessment Moodle
 
@@ -137,7 +151,7 @@ VNC client can be used to connect to the Selenium container (Selenium Chrome Sta
 Connect to: ```localhost:5900```<br>
 Password: ```secret```
 
-## PHPStormm debugging via xDebug
+## PHPStorm debugging via xDebug
 
 Set up two PHP Remote Debug configurations in PHPStorm.
 
