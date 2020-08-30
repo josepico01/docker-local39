@@ -171,19 +171,19 @@ Save.
 
 ### Behat
 Tick ```Filter debug connection by IDE key```<br>
-Configure server with:<br>
-    Server Name: behat-runner-docker<br>
-        Host: localhost<br>
-        Port: 8080<br>
-        Debugger: XDebug<br>
+Configure server with:
+* Server Name: behat-runner-docker
+  * Host: localhost
+  * Port: 8080
+  * Debugger: XDebug
 
 Tick ```Use path mappings```<br>
 Set absolute path on the server for the Project files to: ```/siteroot```<br>
-
 Set the IDE key to: ```behat-runner-docker```
 
 Save.
 
+### Running
 Run either/both debuggers configured in PHPStorm.<br>
 Set any breakpoints in code.<br>
 Run PhpUnit or Behat test as per above instructions.<br>
