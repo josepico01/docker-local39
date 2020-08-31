@@ -6,6 +6,7 @@ RUN apt-get update -y \
     && apt-get install -y \
     curl \
     gnupg \
+    git \
     locales \
     nginx \
     php \
