@@ -63,7 +63,7 @@ Add into /etc/hosts:
 mkdir behatdata behatfaildumps
 ```
 
-5. Build local docker images and run local docker stack
+6. Build local docker images and run local docker stack
 
 ```
 cd docker-local
