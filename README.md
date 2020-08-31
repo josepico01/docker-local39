@@ -58,6 +58,11 @@ Add into /etc/hosts:
 127.0.0.1   eass behat-runner
 ```
 
+5. Create behat data dirs:
+```
+mkdir behatdata behatfaildumps
+```
+
 5. Build local docker images and run local docker stack
 
 ```
