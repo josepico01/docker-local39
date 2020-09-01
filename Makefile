@@ -1,7 +1,7 @@
 # if you want to run the containers in detached mode, provid this argument:
 # OPT=-d
 # e.g. make run OPT=-d
-OPT=
+OPT =
 
 clean:
 	docker system prune -f
@@ -13,7 +13,7 @@ build:
 	docker-compose build
 
 run:
-	docker-compose up $(OPT)
+	HOST_TYPE=$(shell uname) docker-compose up $(OPT)
 
 stop:
 	docker-compose down

@@ -1,6 +1,10 @@
 #!/bin/bash
 
-LOCAL_IP=$(ip route show | awk '/default/ { print $3 }')
+if [[ ${HOST_TYPE} == Linux ]]; then
+    LOCAL_IP=$(ip route show | awk '/default/ { print $3 }')
+else
+    LOCAL_IP=docker.for.mac.localhost
+fi
 
 echo -e "\nxdebug.idekey=${IDE_KEY} \
 \nxdebug.remote_host=${LOCAL_IP}" >> /etc/php/7.2/mods-available/xdebug.ini
