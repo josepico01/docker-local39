@@ -22,6 +22,7 @@ php /siteroot/admin/tool/behat/cli/init.php
 
 # chown the behat data dirs
 for d in behatdata behatfaildumps; do
+    mkdir -p /var/www/$d
     chown -R www-data:www-data /var/www/$d
 done
 

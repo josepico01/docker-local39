@@ -49,8 +49,6 @@ services:
       - "8080:8080"
     volumes:
       - ./siteroot:/siteroot
-      - ./behatdata:/var/www/behatdata
-      - ./behatfaildumps:/var/www/behatfaildumps
     entrypoint: /entrypoint.sh
 
   selenium:
