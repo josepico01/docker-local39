@@ -1,0 +1,28 @@
+version: '3.5'
+
+services:
+  behat-runner:
+    build: ./
+    image: behat_runner
+    environment:
+      - HOST_TYPE
+      - IDE_KEY=behat-runner-docker
+      - SITE_DOMAIN=behat-runner
+      - LISTENING_PORT=8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./siteroot:/siteroot
+    entrypoint: /entrypoint.sh
+
+  selenium:
+    image: selenium/standalone-chrome-debug:latest
+    volumes:
+      - /dev/shm:/dev/shm
+    ports:
+      - 4444:4444
+      - 5901:5900
+
+networks:
+  default:
+    name: local-eass-net

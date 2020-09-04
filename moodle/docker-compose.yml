@@ -1,0 +1,47 @@
+version: '3.5'
+
+services:
+  db:
+    image: postgres:9.6
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: L0c4l_P4ssW0rd
+      POSTGRES_DB: moodle
+      POSTGRES_USER: moodle_user
+    volumes:
+      - 'db:/var/lib/postgresql'
+
+  test-db:
+    image: postgres:9.6
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: L0c4l_P4ssW0rd
+      POSTGRES_DB: moodle
+      POSTGRES_USER: moodle_user
+    volumes:
+      - 'testdb:/var/lib/postgresql'
+
+  eass:
+    build: ./
+    image: eass_moodle
+    depends_on:
+      - db
+      - test-db
+    environment:
+      - HOST_TYPE
+      - IDE_KEY=eass-docker
+      - SITE_DOMAIN=eass
+      - LISTENING_PORT=80
+    ports:
+      - "80:80"
+    volumes:
+      - ./siteroot:/siteroot
+    entrypoint: /entrypoint.sh
+
+volumes:
+  db:
+  testdb:
+
+networks:
+  default:
+    name: local-eass-net

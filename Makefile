@@ -9,24 +9,55 @@ clean:
 status:
 	docker ps -a
 
-build:
-	docker-compose build
+# (re)build the moodle image
+build-eass:
+	docker-compose -f ./moodle/docker-compose.yml build
 
-run:
-	HOST_TYPE=$(shell uname) docker-compose up $(OPT)
+# run the Moodle eAssessment container/databases
+eass:
+	HOST_TYPE=$(shell uname) docker-compose -f ./moodle/docker-compose.yml up $(OPT)
 
-stop:
-	docker-compose down
+# stop the Moodle eAsessment container/databases
+stop-eass:
+	docker-compose -f ./moodle/docker-compose.yml down
 
-restart: stop run
+# restart the Moodle eAsessment container/databases
+restart-eass: stop-eass eass
 
-# clean slate
-refresh: clean restart
+# (re)build the moodle image used to run behat tests
+build-behat:
+	docker-compose -f ./behat/docker-compose.yml build
+
+# run the container for behat testing
+behat:
+	HOST_TYPE=$(shell uname) docker-compose -f ./behat/docker-compose.yml up $(OPT)
+
+# stop the container for behat testing
+stop-behat:
+	docker-compose -f ./moodle/docker-compose.yml down
+
+# restart the container for behat testing
+restart-behat: stop-behat behat
+
+# build all images
+build: build-eass build-behat
+	
+# run all containers, must use with OPT=-d
+run: eass behat
+
+# stop everything
+stop: stop-eass stop-behat
+
+# restart everything, must use with OPT=-d
+restart: restart-eass restart-behat
+
+# clean slate, must use with OPT=-d
+refresh: stop clean restart-eass restart-behat
 
 ### PHP UNIT stuff
 init-phpunit:
 	@docker exec \
     	-it \
     	--user root \
-    	$(shell docker-compose ps -q eass) \
+    	$(shell docker-compose -f moodle/docker-compose.yml ps -q eass) \
     	sh -c 'php /siteroot/admin/tool/phpunit/cli/init.php'

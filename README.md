@@ -14,6 +14,11 @@ The docker-compose tool can be installed via pip, e.g.
     pip install docker-compose
 ```
 
+NOTE: Ensure that any other (hidden) webservers running in the background are stopped, specifically:
+```
+    net stop http
+```
+
 ## Usage
 
 1. Clone this repository
