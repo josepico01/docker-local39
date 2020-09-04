@@ -26,15 +26,15 @@ restart-eass: stop-eass eass
 
 # (re)build the moodle image used to run behat tests
 build-behat:
-	docker-compose -f ./behat/docker-compose.yml build
+	docker-compose -f ./behat-runner/docker-compose.yml build
 
 # run the container for behat testing
 behat:
-	HOST_TYPE=$(shell uname) docker-compose -f ./behat/docker-compose.yml up $(OPT)
+	HOST_TYPE=$(shell uname) docker-compose -f ./behat-runner/docker-compose.yml up $(OPT)
 
 # stop the container for behat testing
 stop-behat:
-	docker-compose -f ./moodle/docker-compose.yml down
+	docker-compose -f ./behat-runner/docker-compose.yml down
 
 # restart the container for behat testing
 restart-behat: stop-behat behat
