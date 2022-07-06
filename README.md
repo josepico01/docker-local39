@@ -29,8 +29,8 @@ git clone ssh://git@bitbucket.apps.monash.edu:7999/eass/docker-local.git
 
 2. Clone Moodle code into siteroot
 
-Prod branch (stable): ```mdl35-monash-eassess```<br>
-Uat branch: ```mdl35-monash-eassess-uat```
+Prod branch (stable): ```mdl39-monash-eassess```<br>
+Uat branch: ```mdl39-monash-eassess-uat```
 
 ```
 cd docker-local
