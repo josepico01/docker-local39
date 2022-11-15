@@ -64,16 +64,16 @@ RUN python3 -m pip install --upgrade awscli jinja2-cli
 
 RUN cd /usr/local/lib/ && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-RUN mkdir /sitedata /var/lib/sitedata /var/lib/testsitedata \
+RUN mkdir /var/lib/sitedata \
     && chmod 0777 /var/lib/sitedata \
+    && mkdir /var/lib/testsitedata \
     && chmod 0777 /var/lib/testsitedata
 
+COPY nginx-site /etc/nginx/sites-available/default
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY nginx-site.j2 /tmp/
-COPY config-sample.php /tmp/
-COPY entrypoint-behat-runner.sh /opt/
-COPY entrypoint-eass.sh /opt/
+COPY xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
 
-RUN chmod +x /opt/entrypoint*.sh
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 
 WORKDIR /siteroot
