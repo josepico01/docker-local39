@@ -1,7 +1,7 @@
 # if you want to run the containers in detached mode, provid this argument:
 # OPT=-d
 # e.g. make run OPT=-d
-OPT =
+OPT =-d
 
 clean:
 	docker system prune -f

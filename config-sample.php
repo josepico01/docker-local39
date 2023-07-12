@@ -4,7 +4,7 @@ unset($CFG);
 global $CFG;
 $CFG = new stdClass();
 
-$CFG->dbtype    = 'pgbouncer';
+$CFG->dbtype    = 'pgsql';
 $CFG->dblibrary = 'native';
 $CFG->dbhost    = 'db';
 $CFG->dbname    = 'moodle';
@@ -17,7 +17,7 @@ $CFG->dboptions = array (
   'dbsocket' => '',
 );
 
-$CFG->phpunit_dbtype    = 'pgbouncer';
+$CFG->phpunit_dbtype    = 'pgsql';
 $CFG->phpunit_dblibrary = 'native';
 $CFG->phpunit_dbhost    = 'test-db';
 $CFG->phpunit_dbname    = 'moodle';
@@ -56,7 +56,7 @@ if (true) {
     $CFG->cachejs = false;
     $CFG->isremote = true;
 }
-$CFG->theme = 'monasheass';
+//$CFG->theme = 'monasheass';
 // $CFG->theme = 'monash';
 $CFG->cookiesecure = false;
 $CFG->custom_context_classes = [

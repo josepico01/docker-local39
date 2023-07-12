@@ -7,7 +7,7 @@ else
 fi
 
 echo -e "\nxdebug.idekey=${IDE_KEY} \
-\nxdebug.remote_host=${LOCAL_IP}" >> /etc/php/7.2/mods-available/xdebug.ini
+\nxdebug.remote_host=${LOCAL_IP}" >> /etc/php/8.1/mods-available/xdebug.ini
 
 echo -e "\n127.0.0.1\t${SITE_DOMAIN}" >> /etc/hosts
 
@@ -27,6 +27,6 @@ for d in behatdata behatfaildumps; do
 done
 
 # start up php-fpm
-service php7.2-fpm start
+service php8.1-fpm start
 
 exec "nginx"
