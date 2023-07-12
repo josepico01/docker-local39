@@ -46,7 +46,7 @@ RUN cd /usr/src \
 
 #Install dependancy for wkhtmltopdf in ubuntu 22.04
 RUN wget https://mirror.sit.fraunhofer.de/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1l-1ubuntu1.2_amd64.deb \
-    && dpkg -i libssl1.1_1.1.1l-1ubuntu1.2_amd64.deb \
+    && dpkg -i libssl1.1_1.1.1l-1ubuntu1.2_amd64.deb
 
 #Install wkhtmltopdf
 RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb \
@@ -67,7 +67,7 @@ RUN apt-get update \
 RUN apt-get update \
     && pecl install excimer \
 	&& echo "extension=excimer.so"  > /etc/php/8.1/mods-available/excimer.ini \
-    && phpenmod excimer \
+    && phpenmod excimer
 
 RUN locale-gen en_AU.UTF-8
 
