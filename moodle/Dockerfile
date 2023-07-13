@@ -82,7 +82,7 @@ RUN mkdir /var/lib/sitedata \
 
 COPY nginx-site /etc/nginx/sites-available/default
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
+COPY xdebug.ini /etc/php/8.1/mods-available/xdebug.ini
 COPY php.ini /etc/php/8.1/mods-available/php.ini
 RUN ln -s /etc/php/8.1/mods-available/php.ini /etc/php/8.1/fpm/conf.d/20-php.ini
 
