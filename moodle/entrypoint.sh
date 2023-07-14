@@ -6,7 +6,8 @@ else
     LOCAL_IP=docker.for.mac.localhost
 fi
 
-echo -e "\nxdebug.idekey=${IDE_KEY}" >> /etc/php/8.1/mods-available/xdebug.ini
+echo -e "\nxdebug.idekey=${IDE_KEY}\
+\nxdebug.client_host=${LOCAL_IP}" >> /etc/php/8.1/mods-available/xdebug.ini
 
 echo -e "\n127.0.0.1\t${SITE_DOMAIN}" >> /etc/hosts
 
