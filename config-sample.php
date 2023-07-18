@@ -4,6 +4,8 @@ unset($CFG);
 global $CFG;
 $CFG = new stdClass();
 
+define('TEST_EXTERNAL_FILES_HTTP_URL', 'http://exttests');
+
 $CFG->dbtype    = 'pgsql';
 $CFG->dblibrary = 'native';
 $CFG->dbhost    = 'db';
