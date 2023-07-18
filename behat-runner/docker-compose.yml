@@ -1,9 +1,8 @@
-version: '3.5'
+version: '3.7'
 
 services:
   behat-runner:
-    build: ./
-    image: behat_runner
+    image: behat_runner:4.1
     environment:
       - HOST_TYPE
       - IDE_KEY=behat-runner-docker

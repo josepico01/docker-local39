@@ -11,7 +11,7 @@ status:
 
 # (re)build the moodle image
 build-eass:
-	docker-compose -f ./moodle/docker-compose.yml build
+	docker build -t eass_moodle:4.1 ./moodle
 
 # run the Moodle eAssessment container/databases
 eass:
@@ -26,7 +26,7 @@ restart-eass: stop-eass eass
 
 # (re)build the moodle image used to run behat tests
 build-behat:
-	docker-compose -f ./behat-runner/docker-compose.yml build
+	docker build -t	behat_runner:4.1 ./behat-runner
 
 # run the container for behat testing
 behat:

@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   db:
-    image: postgres:12
+    image: postgres:14
     restart: always
     environment:
       POSTGRES_PASSWORD: L0c4l_P4ssW0rd
@@ -11,21 +11,22 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - 'db:/var/lib/postgresql/data'
+      - db:/var/lib/postgresql/data
 
   test-db:
-    image: postgres:12
+    image: postgres:14
     restart: always
     environment:
       POSTGRES_PASSWORD: L0c4l_P4ssW0rd
       POSTGRES_DB: moodle
       POSTGRES_USER: moodle_user
+    ports:
+      - "5433:5432"
     volumes:
-      - 'testdb:/var/lib/postgresql/data'
+      - testdb:/var/lib/postgresql/data
 
   eass:
-    build: ./
-    image: eass_moodle
+    image: eass_moodle:4.1
     depends_on:
       - db
       - test-db
@@ -39,6 +40,9 @@ services:
     volumes:
       - ../siteroot:/siteroot
     entrypoint: /entrypoint.sh
+
+  exttests:
+    image: moodlehq/moodle-exttests
 
   redis:
     image: redis/redis-stack-server:latest
