@@ -1,4 +1,4 @@
-# eAssessment Moodle and Behat docker
+# eAssessment Moodle 4.1 and Behat Docker
 
 ## Table of Contents
 - [Requirements](#requirements)
@@ -9,7 +9,7 @@
 - [Running behat tests](#behat)
 - [Viewing the Selenium Chrome instance](#selenium)
 - [PHPStorm debugging via xDebug](#xDebug)
-- [Repository upgrade to support Moodle 4.1](#moodle-upgrade41)
+- [Recommended for Developers](#developers)
 
 ## Requirements
 <a name="requirements"></a>
@@ -17,12 +17,19 @@
 - Docker-compose
 
 For Windows users, make sure to do a full clean re-install of the latest Docker and WSL v2.
-Install the Ubuntu 20.04LTS image from the Microsoft market place.
+Install the Ubuntu 22.04LTS image from the Microsoft market place.
 
-Configure Docker and allow integration from the WSL Ubuntu 20.04LTS image installed.
+Configure Docker and allow integration from the WSL Ubuntu 22.04LTS image installed.
 The docker-compose tool can be installed via pip, e.g.
 ```
     pip install docker-compose
+```
+
+It can be also installed via apt-get
+
+```
+sudo apt-get update
+sudo apt-get install docker-compose-plugin
 ```
 
 NOTE: Ensure that any other (hidden) webservers running in the background are stopped, specifically:
@@ -30,54 +37,51 @@ NOTE: Ensure that any other (hidden) webservers running in the background are st
     net stop http
 ```
 
+Verify that Docker Compose is installed correctly by checking the version.
+```
+docker compose version
+```
 ## Usage
 <a name="usage"></a>
-1. Clone this repository
+1. Clone this repository branch EDAEASS-12143 in docker-local-moodle41
 
 ```
-git clone ssh://git@bitbucket.apps.monash.edu:7999/eass/docker-local.git
+git clone ssh://git@bitbucket.apps.monash.edu:7999/eass/docker-local.git -b EDAEASS-12143 docker-local-moodle41
 ```
 
 2. Clone Moodle code into siteroot
 
-Prod branch (stable): ```mdl39-monash-eassess```<br>
-Uat branch: ```mdl39-monash-eassess-uat```
+Master branch: ```mdl41-monash-eassess```<br>
+Uat branch: ```mdl41-monash-eassess-uat```
 
 ```
-cd docker-local
-git clone git@git.catalyst-au.net:monash/moodle-eassess.git -b <branchname> siteroot
+cd docker-local-moodle41
+git clone git@git.catalyst-au.net:monash/moodle-eassess.git -b mdl41-monash-eassess-uat siteroot
 ```
-
-Alternatively, create a symlink to an existing checkout.
-```
-cd docker-local
-ln -s /path/to/moodle-eassess siteroot
-```
-
-Mandatory step - checkout git submodules:
+3. Mandatory step - checkout git submodules:
 ```
 cd siteroot
 git submodule update --init --recursive
 ```
 
-3. Copy site config across
+4. Since config file has been updated to use the core theme temporarily, please copy site config file across
 
-There is a working sample within the base of the docker-local repository.
+There is a working sample within the base of the repository.
 ```
-cd docker-local
+cd docker-local-moodle41
 cp config-sample.php siteroot/config.php
 ```
 
-4. Add additional host overrides
+5. Add additional host overrides
 Add into /etc/hosts:
 ```
 127.0.0.1   eass behat-runner
 ```
 
-5. Build local docker images and run local docker stack
+6. Build local docker images and run local docker stack
 
 ```
-cd docker-local
+cd docker-local-moodle41
 make build
 make run
 ```
@@ -98,7 +102,7 @@ In a browser:
 
 ## Utility Commands
 <a name="utility-commands"></a>
-Use the following command to enter the bash shell of each container.
+Use the following command to enter the bash shell of each container. Please make sure you are inside the root folder of this repo.
 
 Enter eass container:
 
@@ -132,9 +136,20 @@ Enter the selenium container:
 
 ## Running phpunit tests
 <a name="phpunit"></a>
-First initialise the database:
+before running the phpunit test, please update the composer from ```/siteroot``` outside the container to get all dependencies up to date.
+```
+php composer.phar install
+composer update
+```
+
+Then initialise the database:
 ```
 make init-phpunit
+```
+Or if you prefer to run it from inside the container: 
+```
+./control eass
+php admin/tool/phpunit/cli/init.php
 ```
 
 To run an individual unit test:
@@ -144,6 +159,11 @@ To run an individual unit test:
 e.g.
 ```
 ./run_phpunit.sh auth_manual_testcase auth/manual/tests/manual_test.php
+```
+
+Or inside the container:
+```
+vendor/cli/phpunit --testsuite "core_testsuite"
 ```
 
 ## Running Behat tests
@@ -212,47 +232,8 @@ Run PhpUnit or Behat test as per above instructions.<br>
 Watch the PHPStorm Debugger/Console/Output window.<br>
 Win.
 
-## Repository upgrade to support Moodle 4.1
-<a name="moodle-upgrade41"></a>
-
-1. Clone this repository branch EDAEASS-12143 in docker-local-moodle41
-
-```
-git clone ssh://git@bitbucket.apps.monash.edu:7999/eass/docker-local.git -b EDAEASS-12143 docker-local-moodle41
-```
-
-2. Clone Moodle code into siteroot
-
-Master branch: ```mdl41-monash-eassess```<br>
-Uat branch: ```mdl41-monash-eassess-uat```
-
-```
-cd docker-local-moodle41
-git clone git@git.catalyst-au.net:monash/moodle-eassess.git -b EDAEASS-12143 siteroot
-```
-3. Mandatory step - checkout git submodules:
-```
-cd siteroot
-git submodule update --init --recursive
-```
-
-4. Since config file has been updated to use the core theme, please copy site config file across 
-
-There is a working sample within the base of the repository.
-```
-cd docker-local-moodle41
-cp config-sample.php siteroot/config.php
-```
-
-5. Build local docker images and run local docker stack
-
-```
-cd docker-local-moodle41
-make build
-make run
-```
-
-6. Recommended for phpStorm Dev users
+## Recommended for phpStorm Dev users
+<a name="developers"></a>
 
 - Set up CLI interpreter to get PHP 8.1 configurations from docker. 
 - Set up PHP code sniffer from moodle by downloading [moodle-local_codechecker](https://github.com/moodlehq/moodle-local_codechecker/zipball/master) and follow instructions from [confluence page](https://monash-esol.atlassian.net/wiki/spaces/REST/pages/73073446/phpcs+codesniffer+moodle+code+checker)

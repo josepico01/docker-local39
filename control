@@ -1,31 +1,37 @@
 #! /bin/bash
-
 ## Change to directory of where this script is located
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-cd $DIR;
+BEHAT_DIR=behat-runner
+MOODLE_DIR=moodle
+DB_USERNAME=moodle_user
+DB_NAME=moodle
 
 case "$1" in
     eass)
+        cd "${MOODLE_DIR}" || exit
         cont="$(docker-compose ps -q eass)"
         docker exec -ti $cont bash
         ;;
 
     behat)
+        cd "${BEHAT_DIR}" || exit
         cont="$(docker-compose ps -q behat-runner)"
         docker exec -ti $cont bash
         ;;
 
     db)
+        cd "${MOODLE_DIR}" || exit
         cont="$(docker-compose ps -q db)"
-        docker exec -ti $cont bash
+        docker exec -ti $cont psql --username="${DB_USERNAME}" --dbname="${DB_NAME}" bash
         ;;
 
     testdb)
+        cd "${MOODLE_DIR}" || exit
         cont="$(docker-compose ps -q test-db)"
-        docker exec -ti $cont bash
+        docker exec -ti $cont psql --username="${DB_USERNAME}" --dbname="${DB_NAME}" bash
         ;;
 
     selenium)
+        cd "${BEHAT_DIR}" || exit
         cont="$(docker-compose ps -q selenium)"
         docker exec -ti $cont bash
         ;;
