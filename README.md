@@ -43,10 +43,10 @@ docker compose version
 ```
 ## Usage
 <a name="usage"></a>
-1. Clone this repository branch EDAEASS-12143 in docker-local-moodle41
+1. Clone this repository branch moodle-master41 in docker-local-moodle41
 
 ```
-git clone ssh://git@bitbucket.apps.monash.edu:7999/eass/docker-local.git -b EDAEASS-12143 docker-local-moodle41
+git clone ssh://git@bitbucket.apps.monash.edu:7999/eass/docker-local.git -b moodle-master41 docker-local-moodle41
 ```
 
 2. Clone Moodle code into siteroot

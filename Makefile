@@ -19,7 +19,7 @@ eass:
 
 # stop the Moodle eAsessment container/databases
 stop-eass:
-	docker-compose -f ./moodle/docker-compose.yml down
+	docker-compose -f ./moodle/docker-compose.yml stop
 
 # restart the Moodle eAsessment container/databases
 restart-eass: stop-eass eass
@@ -34,7 +34,7 @@ behat:
 
 # stop the container for behat testing
 stop-behat:
-	docker-compose -f ./behat-runner/docker-compose.yml down
+	docker-compose -f ./behat-runner/docker-compose.yml stop
 
 # restart the container for behat testing
 restart-behat: stop-behat behat
@@ -53,6 +53,11 @@ restart: restart-eass restart-behat
 
 # clean slate, must use with OPT=-d
 refresh: stop clean restart-eass restart-behat
+
+# destroy everything docker related
+down: stop
+	  docker-compose -f ./moodle/docker-compose.yml down
+	  docker-compose -f ./behat-runner/docker-compose.yml down
 
 ### PHP UNIT stuff
 init-phpunit:
