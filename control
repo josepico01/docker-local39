@@ -8,7 +8,7 @@ DB_NAME=moodle
 case "$1" in
     eass)
         cd "${MOODLE_DIR}" || exit
-        cont="$(docker-compose ps -q eass)"
+        cont="$(docker-compose ps -q eass39)"
         docker exec -ti $cont bash
         ;;
 

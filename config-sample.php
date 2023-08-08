@@ -6,11 +6,11 @@ $CFG = new stdClass();
 
 define('TEST_EXTERNAL_FILES_HTTP_URL', 'http://exttests');
 
-$CFG->dbtype    = 'pgsql';
+$CFG->dbtype    = 'pgbouncer';
 $CFG->dblibrary = 'native';
 $CFG->dbhost    = 'db';
-$CFG->dbname    = 'moodle';
-$CFG->dbuser    = 'moodle_user';
+$CFG->dbname    = 'moodle39';
+$CFG->dbuser    = 'moodle_user39';
 $CFG->dbpass    = 'L0c4l_P4ssW0rd';
 $CFG->prefix    = 'mdl_';
 $CFG->dboptions = array (
@@ -19,16 +19,16 @@ $CFG->dboptions = array (
   'dbsocket' => '',
 );
 
-$CFG->phpunit_dbtype    = 'pgsql';
+$CFG->phpunit_dbtype    = 'pgbouncer';
 $CFG->phpunit_dblibrary = 'native';
 $CFG->phpunit_dbhost    = 'test-db';
-$CFG->phpunit_dbname    = 'moodle';
-$CFG->phpunit_dbuser    = 'moodle_user';
+$CFG->phpunit_dbname    = 'moodle39';
+$CFG->phpunit_dbuser    = 'moodle_user39';
 $CFG->phpunit_dbpass    = 'L0c4l_P4ssW0rd';
 $CFG->phpunit_prefix    = 'phpu_';
 $CFG->phpunit_dataroot = '/var/lib/testsitedata';
 
-$CFG->wwwroot   = 'http://eass';
+$CFG->wwwroot   = 'http://eass39';
 $CFG->dataroot  = '/var/lib/sitedata';
 $CFG->admin     = 'admin';
 
@@ -58,8 +58,8 @@ if (true) {
     $CFG->cachejs = false;
     $CFG->isremote = true;
 }
-//$CFG->theme = 'monasheass';
-// $CFG->theme = 'monash';
+$CFG->theme = 'monasheass';
+$CFG->theme = 'monash';
 $CFG->cookiesecure = false;
 $CFG->custom_context_classes = [
     90 => 'local_questionbank\context'
@@ -68,7 +68,7 @@ $CFG->local_envbar_prodwwwroot = 'monash.edu';
 $CFG->local_envbar_items = [
     [
         'id'           => 'dev',
-        'matchpattern' => 'http://(127.0.0.1|eass)',
+        'matchpattern' => 'http://(127.0.0.1|eass39)',
         'showtext'     => 'DEV environment',
         'colourbg'     => 'orange',
         'colourtext'   => 'white',

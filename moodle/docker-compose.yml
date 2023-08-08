@@ -1,41 +1,41 @@
-version: '3.7'
+version: '3.5'
 
 services:
-  db:
-    image: postgres:14
+  db39:
+    image: postgres:9.6
     restart: always
     environment:
       POSTGRES_PASSWORD: L0c4l_P4ssW0rd
       POSTGRES_DB: moodle
       POSTGRES_USER: moodle_user
-      PGDATA: /var/lib/postgresql/data/db
+      PGDATA: /var/lib/postgresql/data/db39
     ports:
       - "5432:5432"
     volumes:
-      - db:/var/lib/postgresql/data
+      - db39:/var/lib/postgresql/data
 
-  test-db:
-    image: postgres:14
+  test-db39:
+    image: postgres:9.6
     restart: always
     environment:
       POSTGRES_PASSWORD: L0c4l_P4ssW0rd
       POSTGRES_DB: moodle
       POSTGRES_USER: moodle_user
-      PGDATA: /var/lib/postgresql/data/db
+      PGDATA: /var/lib/postgresql/data/db39
     ports:
       - "5433:5432"
     volumes:
-      - testdb:/var/lib/postgresql/data
+      - testdb39:/var/lib/postgresql/data
 
-  eass:
-    image: eass_moodle:4.1
+  eass39:
+    image: eass_moodle:3.9
     depends_on:
-      - db
-      - test-db
+      - db39
+      - test-db39
     environment:
       - HOST_TYPE
       - IDE_KEY=eass-docker
-      - SITE_DOMAIN=eass
+      - SITE_DOMAIN=eass39
       - LISTENING_PORT=80
     ports:
       - "80:80"
@@ -52,9 +52,9 @@ services:
       - "6379:6379"
 
 volumes:
-  db:
-  testdb:
+  db39:
+  testdb39:
 
 networks:
   default:
-    name: local-eass-net
+    name: local-eass39-net

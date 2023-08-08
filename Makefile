@@ -1,7 +1,7 @@
 # if you want to run the containers in detached mode, provid this argument:
 # OPT=-d
 # e.g. make run OPT=-d
-OPT =-d
+OPT =
 
 clean:
 	docker system prune -f
@@ -11,7 +11,7 @@ status:
 
 # (re)build the moodle image
 build-eass:
-	docker build -t eass_moodle:4.1 ./moodle
+	docker build -t eass_moodle:3.9 ./moodle
 
 # run the Moodle eAssessment container/databases
 eass:
@@ -26,7 +26,7 @@ restart-eass: stop-eass eass
 
 # (re)build the moodle image used to run behat tests
 build-behat:
-	docker build -t	behat_runner:4.1 ./behat-runner
+	docker build -t	behat_runner:3.9 ./behat-runner
 
 # run the container for behat testing
 behat:
@@ -41,7 +41,7 @@ restart-behat: stop-behat behat
 
 # build all images
 build: build-eass build-behat
-	
+
 # run all containers, must use with OPT=-d
 run: eass behat
 

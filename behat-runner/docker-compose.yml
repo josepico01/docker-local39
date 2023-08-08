@@ -1,8 +1,8 @@
-version: '3.7'
+version: '3.5'
 
 services:
   behat-runner:
-    image: behat_runner:4.1
+    image: behat_runner:3.9
     environment:
       - HOST_TYPE
       - IDE_KEY=behat-runner-docker
@@ -24,4 +24,4 @@ services:
 
 networks:
   default:
-    name: local-eass-net
+    name: local-eass39-net

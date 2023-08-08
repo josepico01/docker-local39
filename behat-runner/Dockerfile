@@ -1,4 +1,4 @@
-FROM eass_moodle:4.1
+FROM eass_moodle:3.9
 
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
