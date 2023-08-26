@@ -20,7 +20,7 @@ case "$1" in
 
     db)
         cd "${MOODLE_DIR}" || exit
-        cont="$(docker-compose ps -q db)"
+        cont="$(docker-compose ps -q db39)"
         docker exec -ti $cont psql --username="${DB_USERNAME}" --dbname="${DB_NAME}" bash
         ;;
 
