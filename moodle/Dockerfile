@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -40,12 +40,12 @@ RUN cd /usr/src \
    && make \
    && make install \
    && pecl install xdiff \
-   && echo "extension=xdiff.so" > /etc/php/7.2/mods-available/xdiff.ini \
+   && echo "extension=xdiff.so" > /etc/php/7.4/mods-available/xdiff.ini \
    && phpenmod xdiff
 
 #Install dependancy for wkhtmltopdf in ubuntu 22.04
-#RUN wget https://mirror.sit.fraunhofer.de/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1l-1ubuntu1.2_amd64.deb \
-#    && dpkg -i libssl1.1_1.1.1l-1ubuntu1.2_amd64.deb
+RUN wget https://mirror.sit.fraunhofer.de/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1l-1ubuntu1.2_amd64.deb \
+     && dpkg -i libssl1.1_1.1.1l-1ubuntu1.2_amd64.deb
 
 #Install wkhtmltopdf
 RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.deb \
@@ -58,14 +58,14 @@ RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkh
 RUN apt-get update \
     && apt-get install -y libmagickwand-dev ghostscript --no-install-recommends \
     && pecl install imagick \
-	&& echo "extension=imagick.so"  > /etc/php/7.2/mods-available/imagick.ini \
+	&& echo "extension=imagick.so"  > /etc/php/7.4/mods-available/imagick.ini \
     && phpenmod imagick \
     && sed -i 's/^.*policy.*coder.*none.*PDF.*//' /etc/ImageMagick-6/policy.xml
 
 #Install php-excimer
 RUN apt-get update \
     && pecl install excimer \
-	&& echo "extension=excimer.so"  > /etc/php/7.2/mods-available/excimer.ini \
+	&& echo "extension=excimer.so"  > /etc/php/7.4/mods-available/excimer.ini \
     && phpenmod excimer
 
 RUN locale-gen en_AU.UTF-8
@@ -81,10 +81,10 @@ RUN mkdir /var/lib/sitedata \
 
 COPY nginx-site /etc/nginx/sites-available/default
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
-COPY php.ini /etc/php/7.2/mods-available/php.ini
-RUN ln -s /etc/php/7.2/mods-available/php.ini /etc/php/7.2/fpm/conf.d/20-php.ini
-RUN ln -s /etc/php/7.2/mods-available/php.ini /etc/php/7.2/cli/conf.d/20-php.ini
+COPY xdebug.ini /etc/php/7.4/mods-available/xdebug.ini
+COPY php.ini /etc/php/7.4/mods-available/php.ini
+RUN ln -s /etc/php/7.4/mods-available/php.ini /etc/php/7.4/fpm/conf.d/20-php.ini
+RUN ln -s /etc/php/7.4/mods-available/php.ini /etc/php/7.4/cli/conf.d/20-php.ini
 
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh /
